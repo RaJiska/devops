@@ -123,6 +123,14 @@
 		header('Content-Type: application/json');
 		echo json_encode($response, JSON_NUMERIC_CHECK);
 	}
+
+	function isAValidName($name) {
+		if (!preg_match('/[^A-Za-z0-9]/', $name)) {
+			return true;
+		} else {
+			return false;
+		}
+	}
 	
 	switch($request_method)
 	{	
