@@ -2,11 +2,9 @@ FROM node:13.12.0-alpine as builder
 
 WORKDIR /build
 COPY . /build
-RUN npm install
+RUN npm install && npm run-script build
 
-FROM node:13.12.0-alpine
+FROM nginx:alpine
 
 WORKDIR /app
-COPY --from=builder /build .
-
-CMD [ "npm", "start" ]
+COPY --from=builder /build/build .
