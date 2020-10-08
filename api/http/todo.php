@@ -1,6 +1,4 @@
 <?php
-	header('Access-Control-Allow-Origin: *');
-
 	// Connect to database
 	include("db_connect.php");
 	$request_method = $_SERVER["REQUEST_METHOD"];
@@ -8,6 +6,7 @@
 	function getProducts()
 	{
 		global $conn;
+		header('Content-Type: application/json');
 		$query = "SELECT * FROM todo";
 		$response = array();
 		$result = mysqli_query($conn, $query);
@@ -16,13 +15,13 @@
 			$row["completed"] = (bool)$row["completed"];
 			$response[] = $row;
 		}
-		header('Content-Type: application/json');
 		echo json_encode($response, JSON_NUMERIC_CHECK);
 	}
 	
 	function getProduct($id=0)
 	{
 		global $conn;
+		header('Content-Type: application/json');
 		$query = "SELECT * FROM todo";
 		if($id != 0)
 		{
@@ -39,13 +38,13 @@
 			foreach ($v as $key => $val) $c[$key] = $val;
 			return $c;
 		    }, array());
-		header('Content-Type: application/json');
 		echo json_encode($response, JSON_NUMERIC_CHECK);
 	}
 	
 	function AddProduct()
 	{
 		global $conn;
+		header('Content-Type: application/json');
 		$title = $_POST["title"];
 		$description = $_POST["description"];
 		$completed = $_POST["completed"];
@@ -63,13 +62,13 @@
 			foreach ($v as $key => $val) $c[$key] = $val;
 			return $c;
 		    }, array());
-		header('Content-Type: application/json');
 		echo json_encode($response, JSON_NUMERIC_CHECK);
 	}
 	
 	function updateProduct($id)
 	{
 		global $conn;
+		header('Content-Type: application/json');
 		$_PUT = array();
 		parse_str(file_get_contents('php://input'), $_PUT);
 		$title = $_PUT["title"];
@@ -94,13 +93,13 @@
 			foreach ($v as $key => $val) $c[$key] = $val;
 			return $c;
 		    }, array());
-		header('Content-Type: application/json');
 		echo json_encode($response, JSON_NUMERIC_CHECK);
 	}
 	
 	function deleteProduct($id)
 	{
 		global $conn;
+		header('Content-Type: application/json');
 		$query = "SELECT * FROM todo";
 		if($id != 0)
 		{
@@ -119,8 +118,6 @@
 		    }, array());
 		$query = "DELETE FROM todo WHERE id=".$id;
 		mysqli_query($conn, $query);
-		
-		header('Content-Type: application/json');
 		echo json_encode($response, JSON_NUMERIC_CHECK);
 	}
 

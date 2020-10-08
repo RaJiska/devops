@@ -22,7 +22,7 @@ class App extends Component {
   }
   refreshList = () => {
     axios
-      .get("http://httpgatewaycoucou/todo.php")
+      .get("http://localhost:8080/todo.php")
       .then(res => this.setState({ todoList: res.data }))
       .catch(err => console.log(err));
   };
@@ -92,19 +92,19 @@ class App extends Component {
     this.toggle();
     if (item.id) {
       axios
-        .put(`http://httpgatewaycoucou/todo.php?id=${item.id}`, item)
+        .put(`http://localhost:8080/todo.php?id=${item.id}`, item)
         .then(res => this.refreshList())
         .catch(err => console.log(err));
       return;
     }
     axios
-      .post("http://httpgatewaycoucou/todo.php", item)
+      .post("http://localhost:8080/todo.php", item)
       .then(res => this.refreshList())
       .catch(err => console.log(err));
   };
   handleDelete = item => {
     axios
-      .delete(`http://httpgatewaycoucou/todo.php?id=${item.id}`)
+      .delete(`http://localhost:8080/todo.php?id=${item.id}`)
       .then(res => this.refreshList())
       .catch(err => console.log(err));
   };
