@@ -29,7 +29,8 @@ services:
       - web
   backendfpm:
     container_name: backendfpm
-    build: api/
+    build:
+      context: api/
     environment:
       DB_HOST: database
       DB_USER: user
@@ -41,7 +42,8 @@ services:
       - web
   frontendreact:
     container_name: frontendreact
-    build: frontend/
+    build:
+      context: frontend/
     volumes:
       - ./conf/nginxfront.conf:/etc/nginx/conf.d/default.conf:ro
     environment:
@@ -60,6 +62,14 @@ services:
       - ./api:/tests
     working_dir: /tests/test
     command: phpunit todo_test.php
+  front-tests:
+    container_name: front-tests
+    build:
+      context: frontend/
+      dockerfile: Dockerfile-Tests
+    working_dir: /build
+    environment:
+      CI: "true"
 networks:
   web:
     driver: bridge
