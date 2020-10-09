@@ -1,1 +1,0 @@
-C:37:"PHPUnit\Runner\DefaultTestResultCache":244:{a:2:{s:7:"defects";a:2:{s:32:"todo_test::testCanBeUsedAsString";i:4;s:26:"todo_test::testInvalidName";i:3;}s:5:"times";a:3:{s:32:"todo_test::testCanBeUsedAsString";d:0;s:24:"todo_test::testValidName";d:0;s:26:"todo_test::testInvalidName";d:0;}}}

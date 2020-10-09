@@ -1,0 +1,17 @@
+name: Full CI
+
+on:
+  push:
+    branches:
+      - 'dev'
+      - 'master'
+
+jobs:
+  tests:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v2
+      - name: Build Dockers
+        run: docker-compose build --no-cache
+      - name: Run Test Backend
+        run: docker-compose up back-tests
