@@ -45,11 +45,13 @@
 	{
 		global $conn;
 		header('Content-Type: application/json');
-		$title = $_POST["title"];
-		$description = $_POST["description"];
-		$completed = $_POST["completed"];
-		$query="INSERT INTO todo(title, description, completed) VALUES('".$title."', '".$description."', '".$completed."')";
+		$title = $_GET["title"];
+		$description = $_GET["description"];
+		$completed = $_GET["completed"];
+		$query="INSERT INTO todo(title, description, completed) VALUES('".$title."', '".$description."', ".$completed.")";
 		mysqli_query($conn, $query);
+		echo($query);
+		var_dump(mysqli_error($conn));
 		$query = "SELECT * FROM todo WHERE title='".$title."' LIMIT 1";
 		$response = array();
 		$result = mysqli_query($conn, $query);
@@ -69,11 +71,9 @@
 	{
 		global $conn;
 		header('Content-Type: application/json');
-		$_PUT = array();
-		parse_str(file_get_contents('php://input'), $_PUT);
-		$title = $_PUT["title"];
-		$description = $_PUT["description"];
-		$completed = $_PUT["completed"];
+		$title = $_GET["title"];
+		$description = $_GET["description"];
+		$completed = $_GET["completed"];
 		$query="UPDATE todo SET title='".$title."', description='".$description."', completed='".(int)$completed."' WHERE id=".$id;
 		
 		mysqli_query($conn, $query);

@@ -92,13 +92,13 @@ class App extends Component {
     this.toggle();
     if (item.id) {
       axios
-        .put(`http://localhost:8080/todo.php?id=${item.id}`, item)
+        .put(`http://localhost:8080/todo.php?id=${item.id}&title=${item.title}&decription=${item.description}&completed=${item.completed ? 1 : 0}`)
         .then(res => this.refreshList())
         .catch(err => console.log(err));
       return;
     }
     axios
-      .post("http://localhost:8080/todo.php", item)
+      .post(`http://localhost:8080/todo.php?title=${item.title}&decription=${item.description}&completed=${item.completed ? 1 : 0}`)
       .then(res => this.refreshList())
       .catch(err => console.log(err));
   };
