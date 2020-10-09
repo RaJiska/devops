@@ -14,4 +14,6 @@ jobs:
       - name: Build Dockers
         run: docker-compose build --no-cache
       - name: Run Test Backend
-        run: docker-compose up back-tests
+	run: docker-compose up back-tests
+      - name: Run Test Frontend
+        run: docker-compose up front-tests

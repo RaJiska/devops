@@ -1,0 +1,7 @@
+FROM node:13.12.0-alpine as builder
+
+WORKDIR /build
+COPY . /build
+RUN npm install
+
+CMD [ "npm", "test", "a" ]
